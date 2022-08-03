@@ -228,11 +228,16 @@ Password for 'https://Ewan67@github.com': <nuestro Personal Access Token>
 ... inicia el proceso ...
 ```
 
+> **Nota:** Si tenéis vuestra dirección de mail en **GH** configurada como privada, puede que os salga un mensaje al intentar publicar advirtiendo sobre la posibilidad de que ésta sea visible. La solución a este aviso es utilizar una dirección de correo que Github denomina <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">noreplay</code>.&nbsp;&nbsp;personalizada y única para cada usuario. [Aqui](https://docs.github.com/es/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address) podéis ver cómo funciona el tema y dónde obtener vuestra dirección <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">xxxxxxxxx+&lt;mi_usuarioGH&gt;@users.noreply.github.com</code> personal.
+>> Una vez os hagáis con ella podéis configurarla en **local** ejecutando el comando:
+<code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">$ git config --global user.email "xxxxxxxxx+&lt;mi_usuarioGH&gt;@users.noreply.github.com"</code>
+
+
 Ahora nos vamos a nuestra pestaña del navegador donde tenemos abierta la web de Github, accedemos a nuestro repositorio <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">&lt;mi_usuarioGH&gt;.github.io</code>&nbsp;&nbsp;y pinchamos en ***Commit*** para ver el progreso de nuestro envío.
 
 Una vez finalizado (según el número de cambios, el estado de la red, etc; el proceso puede tardar unos minutos, sed pacientes) veremos que se nos ha creado una nueva rama (branch) en nuestro repo llamada <code class="language-plaintext highlighter-rouge" style="color:#3361ff;">gh-pages</code>. Toca hacer la última configuración que mencionaba mas arriba para dejar todo ok.
 
-Desde la *home* de nuestro repo cuya URL será algo como
+Desde la *home* de nuestro repo cuya URL será algo como ...
 
 ```
 https://github.com/<mi_usuarioGH>/<mi_usuarioGH>.github.io)
