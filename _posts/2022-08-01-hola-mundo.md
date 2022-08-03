@@ -5,4 +5,4 @@ categories: [Tutos]
 tags: ["hola mundo"]     # TAG names should always be lowercase
 ---
 
-Mi primer post en GH ;)
+Mi primer post en **Github Pages** ;)

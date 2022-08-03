@@ -2,7 +2,7 @@
 title: Tutorial Github Pages + Jekyll + Chirpy
 date: 2022-08-01 17:10:00 +0800
 categories: [Tutos]
-tags: ["github pages", tutos]     # TAG names should always be lowercase
+tags: ["github pages", tutos, jekyll, chirpy]     # TAG names should always be lowercase
 ---
 
 ## Intro.
