@@ -21,9 +21,9 @@ A continuación os dejo una guía paso a paso para aquellos que quieran intentar
 
 Como en todo proyecto basado en **Github** tenemos que tener claro los dos entornos en los que vamos a movernos:
 
-* Por una lado **Github** como tal, al que accedemos via el navegador. Doy por hecho que disponéis de una cuenta, de no ser así, el primer paso es [registrarse](https://github.com/signup). Por simplicidad, de aquí en adelante me voy a referir a Github con la abreviatura **GH**.
+* Por una lado **Github** como tal, al que accederemos via el navegador. Doy por hecho que disponéis de una cuenta, de no ser así, el primer paso es [registrarse](https://github.com/signup). Por simplicidad, de aquí en adelante me voy a referir a Github con la abreviatura **GH**.
 
-* Por otro lado nuestro **entorno de desarrollo local**, disponible en nuestra propia máquina y en el que realizaremos los cambios que luego publicaremos en **GH**. En mi caso utilizo un ordenador con Kali, una distribución de Linux basada en Debian. Por simplicidad, de aquí en adelante me voy a referir a nuestra máquina como **local**. 
+* Por otro lado tendremos nuestro **entorno de desarrollo local**, disponible en nuestra propia máquina y en el que realizaremos los cambios que luego publicaremos en **GH**. En mi caso utilizo un ordenador con Kali, una distribución de Linux basada en Debian. Por simplicidad, de aquí en adelante me voy a referir a nuestra máquina como **local**. 
 
 
 ## Configuración de nuestro sitio en GH.
@@ -42,7 +42,7 @@ https://github.com/cotes2020/chirpy-starter/generate
 
 4. Completamos el input ***Repository name*** con el valor: `<mi_usuarioGH>.github.io` donde `<mi_usuarioGH>` es vuestro usuario de **GH** tal como aparece en el desplegable ***Owner*** que esta a la izquierda. Es fundamental que lo escribáis tal cual.
 
-5. Nos aseguramos que el checkbox ***Public*** este seleccionado.
+5. Nos aseguramos que el checkbox ***Public*** esté seleccionado.
 
 6. Damos al boton **Create repository from template**.
 
@@ -98,13 +98,13 @@ Y desde alli nos traemos nuestro repositorio de **GH** con ...
 $ git clone https://github.com/<mi_usuarioGH>/<mi_usuarioGH>.github.io.gi
 ```
 
-Una vez finalizado el proceso, nos movemos al directorio que nos hemos descargado ...
+Una vez finalizado el proceso, nos movemos al directorio que se acaba de crear con la descarga ...
 
 ```console
 $ cd <mi_usuarioGH>.github.io.gi
 ```
 
-Ejecuntando un `ls` en este directorio deberíamos ver algo asi ...
+Ejecuntando un `ls` en él deberíamos ver algo asi ...
 
 ```
 ┌──(ewan㉿kali)-[~/<mi_usuarioGH>/<mi_usuarioGH>.github.io]
@@ -116,7 +116,7 @@ Bien, ahora vamos a editar algunos ficheros de este directorio antes de generar 
 
 > **Nota:** un par de líneas más abajo os explico esto de *generar* nuestro sitio y la mecánica que hay en juego.
 
-El primer fichero que vamos a editar es el <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">_config.yml</code> que se encuentra en nuestro directorio <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">~/&lt;mi_usuarioGH&gt;/&lt;mi_usuarioGH&gt;.github.io</code> (aka nuestro directorio raíz del proyecto si lo habéis creado en el directorio *home* de vuestro equipo).
+El primer fichero que vamos a editar es el <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">_config.yml</code> que se encuentra en nuestro directorio <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">~/&lt;mi_usuarioGH&gt;/&lt;mi_usuarioGH&gt;.github.io</code> (aka nuestro directorio raíz del proyecto si lo habéis creado en el *home* de vuestro equipo).
 
 Lo abrimos en nuestro editor preferido, le echamos un ojo, y modificamos los siguientes valores:
 
@@ -138,7 +138,7 @@ Lo abrimos en nuestro editor preferido, le echamos un ojo, y modificamos los sig
 
 ![](/assets/posts/20220801/img02.png)
 
-Que son valores son los que van a aparecer asociados a los iconos ubicados al final del lateral izquierdo de la página. 
+Estos son los valores que van a aparecer asociados a los iconos ubicados al final del lateral izquierdo de la página. 
 
 * <p><code class="language-plaintext highlighter-rouge">avatar: <span style="color:var(--filepath-text-color);">/assets/common/<em>&lt;mi_avatar.jpg|png&gt;</em></span></code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esta es la imagen que va a aparecer en el lateral izquierdo. Tened en cuenta almacenarla en la carpeta <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">~/&lt;mi_usuarioGH&gt;.github.io/assets/common/</code>.</p>
 
@@ -172,11 +172,11 @@ Si todo ha ido ok, estaremos viendo nuestro flamante sitio web basado en Jekyll 
 
 Cada vez que ejecutemos `bundle` recrearemos nuestro sitio a partir de los ficheros que tengamos en nuestro directorio raíz. Si hemos iniciado el servidor y hacemos algún cambio, el proceso regenera nuestro site de manera automática, sin necesidad de pararlo y volverlo a iniciar.
 
-> **Nota:** para parar el servidor de jekyll ejecutamos `Ctrl + d`
+> **Nota:** para parar el servidor de jekyll ejecutamos `Ctrl + c`
 
 ## Nuestro primer post.
 
-Ahora vamos a crear nuestro primer post. Va a ser algo sencillo y no voy a entrar en muchos detalles al respecto. Apenas cuente con algo de tiempo tengo idea de publicar una segunda parte de esta guía con algo más de información. Los mas ansiosos podéis echar un ojo a la documentación oficial disponible pinchando en los links que apunté mas arriba.
+Ahora vamos a crear nuestro primer post. Va a ser algo sencillo y no voy a entrar en muchos detalles al respecto. Apenas cuente con un poco de tiempo tengo idea de publicar una segunda parte de esta guía con algo más de información. Los mas ansiosos podéis echar un ojo a la documentación oficial disponible pinchando en los links que os he ido dejando.
 
 En nuestro editor de texto preferido creamos un fichero nuevo y lo guardamos en la carpeta <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/_posts</code> de nuestro directorio raíz (es decir, en: <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">~/&lt;mi_usuarioGH&gt;/&lt;mi_usuarioGH&gt;.github.io/_posts/</code>) con el siguiente formato de nombre <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">YYYY-MM-DD-un-nombre.md</code>, por ejemplo: 
 
@@ -198,13 +198,13 @@ Mi primer post en GH ;)
 
 Guardamos y volvemos al navegador donde tenemos abierto nuestro sitio. Refrescamos y debería aparecernos nuestra nueva entrada.
 
-> De no ver los cambios, id al terminal, cerrar la sesion del server con `Ctrl + d`, volved a ejecutar `$ bundle exec jekyll s`&nbsp;&nbsp;, recargar el site desde la ventana del navegador. Si, es cierto, a veces el tema del regenerado automático se queda tieso :(
+> De no ver los cambios, id al terminal, cerrar la sesion del server con `Ctrl + c`, volved a ejecutar `$ bundle exec jekyll s`&nbsp;&nbsp;y recargar el site desde la ventana del navegador. Si, es cierto, a veces el tema del regenerado automático se queda tieso :(
 
 ## Subir todo a Github.
 
 La mecánica aquí es la habitual para subir cosas a Github por lo que iré algo rápido, centrándome solo en un detalle particular que debemos considerar relacionado con Github Pages.
 
-Tened en cuenta que para ejecutar el `push`&nbsp;&nbsp;nos va a solicitar vuestra **Personal Access Token** de Github. Si no disponéis de ella, [aqui](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-token) tenéis la documentación oficial de Github para crearla.
+Tened en cuenta que para ejecutar el `push`&nbsp;&nbsp;que veremos en breve el sistema nos va a solicitar nuestra **Personal Access Token** de Github. Si no disponéis de ella, [aqui](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-token) tenéis la documentación oficial de Github para crearla.
 
 Desde nuestro terminal, posicionados en nuestro directorio raíz, ejecutamos:
 
