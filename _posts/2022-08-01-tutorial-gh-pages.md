@@ -7,21 +7,23 @@ tags: ["github pages", tutos, jekyll, chirpy]     # TAG names should always be l
 
 ## Intro.
 
-Buscando un espacio donde publicar manuales de cosecha propia, writeups en español y cosas por el estilo, se me ocurrió echar un ojo a [GitHub Pages](https://pages.github.com/). Si bien había oído hablar de este servicio (llevo tiempo trabajando con [GitHub](https://github.com/) como repositorio de código) nunca le había prestado demasiada atención. 
+Ahora que en Agosto baja un poco la carga de curro me propuse aprovechar el tiempo y darle salida a una idea a la que llevaba tiempo dándole vueltas: montar un sitio web donde publicar manuales de cosecha propia, notas de CTFs en español, resúmenes que elaboré para preparar algún exámen de certificación, documentación y cosas por el estilo que llevan tiempo deambulando por mi ordenador. El objetivo ? ... que pudiesen serle útiles a alguien y devolver modestamente a la comunidad una pequeñísima parte de todo lo que me ha brindado.
 
-El servicio lo presentan como algo sencillo de montar y mantener, sin coste, basado en git, sin el poder de un CMS pero también sin sus complicaciones ... en resumen: un recurso ideal para disponer de una página personal en la que compartir contenido de un modo digno y asequible.
+Buscando un espacio que cubriese mis necesidades se me ocurrió echar un ojo a [GitHub Pages](https://pages.github.com/). Si bien había oído hablar de este servicio (llevo tiempo trabajando con [GitHub](https://github.com/) como repositorio de código) nunca le había prestado demasiada atención. 
+
+El servicio lo presentan como algo sencillo de montar y mantener, sin coste, basado en git, sin el poder de un CMS pero también sin sus complicaciones ... en resumen: un recurso ideal para disponer de una página personal en la que compartir contenido de un modo ágil, digno y asequible.
 
 Tras un par de pruebas con los temas que ofrece el servicio por defecto me decidí por montar mi repo personal con [Jekyll](https://jekyllrb.com/) y [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy), el tema que más me gustó de los que hay disponibles [aquí](http://jekyllthemes.org/).
 
-A continuación os dejo una guía paso a paso para aquellos que quieran intentarlo.
+Al hilo del párrafo que abre el post, me pareció buena idea aprovechar el viaje y documentar el proceso. He aquí el resultado.
 
-> **Nota importante:** el contenido de este post puede resultar demasiado básico a quienes cuenten con cierta experiencia en ámbitos como Git, Ruby o Linux, pero su objetivo es justamente ese: servir de guía a quienes se embarquen por primera vez en estas lides. Por otra parte, y para quienes quieran profundizar, dejo enlaces a la documentación original en cada apartado.
+> **Nota importante:** el contenido de esta entrada puede resultar demasiado básico a quienes cuenten con cierta experiencia en ámbitos como Git, Ruby o Linux, pero su objetivo es justamente ese: volver asequible el proceso a quienes se embarquen por primera vez en estas lides. Por otra parte, y para quienes quieran profundizar, dejo enlaces a la documentación original en cada apartado.
 
 ## Algunas generalidades antes de empezar ...
 
 Como en todo proyecto basado en **Github** tenemos que tener claro los dos entornos en los que vamos a movernos:
 
-* Por una lado **Github** como tal, al que accederemos via el navegador. Doy por hecho que disponéis de una cuenta, de no ser así, el primer paso es [registrarse](https://github.com/signup). Por simplicidad, de aquí en adelante me voy a referir a Github con la abreviatura **GH**.
+* Por una lado **Github** como tal, al que accederemos via el navegador. Doy por hecho que disponéis de una cuenta; de no ser así, el primer paso es [registrarse](https://github.com/signup). Por simplicidad, de aquí en adelante me voy a referir a Github con la abreviatura **GH**.
 
 * Por otro lado tendremos nuestro **entorno de desarrollo local**, disponible en nuestra propia máquina y en el que realizaremos los cambios que luego publicaremos en **GH**. En mi caso utilizo un ordenador con Kali, una distribución de Linux basada en Debian. Por simplicidad, de aquí en adelante me voy a referir a nuestra máquina como **local**. 
 
