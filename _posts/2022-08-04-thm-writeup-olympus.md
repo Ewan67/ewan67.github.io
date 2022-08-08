@@ -1,5 +1,5 @@
 ---
-title: THM - Olympus Writeup
+title: THM - Olympus - Writeup
 date: 2022-08-04 09:30:00 +0800
 categories: [THM, Writeup]
 tags: [thm, writeups]     # TAG names should always be lowercase
