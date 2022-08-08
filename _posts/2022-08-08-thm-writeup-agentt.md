@@ -29,10 +29,10 @@ Abrimos otro terminal en local, creamos la carpeta de trabajo, nos posicionamos 
 └─$ cd Cybersecurity/THM
 
 ┌──(ewan67㉿kali)-[~/Cybersecurity/THM]
-└─$ mkdir Olympus
+└─$ mkdir AgentT
 
 ┌──(ewan67㉿kali)-[~/Cybersecurity/THM]
-└─$ cd Olympus
+└─$ cd AgentT
 
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/AgentT]
 └─$ touch notas
