@@ -1,5 +1,5 @@
 ---
-title: HTB - Tier 0 - Dancing Writeup
+title: HTB - Starting Point - Tier 0 - Dancing Writeup
 date: 2022-08-09 09:20:00 +0800
 categories: [HTB, Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
@@ -17,7 +17,7 @@ Copiamos la IP del equipo remoto, en mi caso *10.129.186.250*, y lanzamos un **n
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/HTB/Tier0]
-└─$ nmap -A 10.129.186.250
+└─$ nmap -A 10.129.186.250 -oN nmap_output
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-09 12:34 CEST
 Nmap scan report for 10.129.186.250
 Host is up (0.081s latency).
@@ -41,7 +41,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 20.54 seconds
 ```
 
-Tenemos el puerto *445/tcp* abierto (SMB ?) y con el servicio *microsoft-ds* escuchando.
+Significado de las flags:
+
+* `-A`&nbsp;: escaneo completo (aka agresivo) que ejecuta OS detection, version detection, script scanning y traceroute todo del tirón.
+* `-oN`&nbsp;: imprime la salida en un fichero de texto con el nombre *nmap_output*
+
+Tenemos el puerto *445/tcp* abierto (SMB) y con el servicio *microsoft-ds* escuchando.
 
 Utilizamos **smbclient** para conectarnos y sacar un listado de los recursos disponibles con el comando ```-L```&nbsp;. Como no tenemos password, cuando nos la pide le damos al Enter.
 

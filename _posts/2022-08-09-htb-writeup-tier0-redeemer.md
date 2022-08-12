@@ -1,5 +1,5 @@
 ---
-title: HTB - Tier 0 - Redeemer Writeup
+title: HTB - Starting Point - Tier 0 - Redeemer Writeup
 date: 2022-08-09 09:30:00 +0800
 categories: [HTB, Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
@@ -17,7 +17,7 @@ Copiamos la IP del equipo remoto, en mi caso *10.129.213.71*, y lanzamos un **nm
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/HTB/Tier0]
-└─$ nmap -A 10.129.213.71    
+└─$ nmap -A 10.129.213.71 -oN nmap_output
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-09 12:46 CEST
 Nmap scan report for 10.129.213.71
 Host is up (0.12s latency).
@@ -28,13 +28,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 2.81 seconds
 ```
 
+Significado de las flags:
+
+* `-A`&nbsp;: escaneo completo (aka agresivo) que ejecuta OS detection, version detection, script scanning y traceroute todo del tirón.
+* `-oN`&nbsp;: imprime la salida en un fichero de texto con el nombre *nmap_output*
+
 Ups !! ... nobody listen :(
-  
+
 Vamos a por todos los puertos utilizando la flag ```-p-```&nbsp;, no solo los 1000 de ```-A```&nbsp;.
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/HTB/Tier0]
-└─$ nmap -A -p- 10.129.213.71
+└─$ nmap -A -p- 10.129.213.71 -oN nmap_output
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-09 12:48 CEST
 Nmap scan report for 10.129.213.71
 Host is up (0.075s latency).
@@ -72,7 +77,11 @@ os:Linux 5.4.0-77-generic x86_64
 10.129.213.71:6379>
 ```
 
-Lanzamos un *select*, le pedimos todas las *keys* y volcamos con *get* la que nos interesa.
+Lanzamos un *select*, le pedimos todas las *keys* y volcamos con *get* la que nos interesa. Para mas info sobre estos comandos:
+
+* [SELECT index](https://redis.io/commands/select/)
+* [KEYS pattern](https://redis.io/commands/keys/)
+* [GET key](https://redis.io/commands/get/)
 
 ```console
 [...]
@@ -87,6 +96,8 @@ OK
 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 10.129.213.71:6379>
 ```
+
+Con esto completamos el **Tier 0** y se nos habilita el botón para pasar al siguiente nivel, el **Tier 1**.
 
 Enhorabuena a los que habéis llegado hasta aquí.
 

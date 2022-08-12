@@ -1,5 +1,5 @@
 ---
-title: HTB - Tier 0 - Fawn Writeup
+title: HTB - Starting Point - Tier 0 - Fawn Writeup
 date: 2022-08-09 09:10:00 +0800
 categories: [HTB, Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
@@ -17,7 +17,7 @@ Copiamos la IP del equipo remoto, en mi caso *10.129.211.1*, y lanzamos un **nma
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/HTB/Tier0]
-└─$ nmap -A 10.129.211.1
+└─$ nmap -A 10.129.211.1 -oN nmap_output
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-09 10:37 CEST
 Nmap scan report for 10.129.211.1
 Host is up (0.047s latency).
@@ -44,6 +44,11 @@ Service Info: OS: Unix
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 3.39 seconds
 ```
+
+Significado de las flags:
+
+* `-A`&nbsp;: escaneo completo (aka agresivo) que ejecuta OS detection, version detection, script scanning y traceroute todo del tirón.
+* `-oN`&nbsp;: imprime la salida en un fichero de texto con el nombre *nmap_output*
 
 En vista de que tiene un servicio *ftp* corriendo en el puerto *21/tcp* vamos a por él utilizando el usuario *anonymous* y sin password.
 

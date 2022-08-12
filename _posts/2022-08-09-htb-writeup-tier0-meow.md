@@ -1,5 +1,5 @@
 ---
-title: HTB - Tier 0 - Meow Writeup
+title: HTB - Starting Point - Tier 0 - Meow Writeup
 date: 2022-08-09 09:00:00 +0800
 categories: [HTB, Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
@@ -58,7 +58,7 @@ Copiamos la IP del equipo remoto, en mi caso *10.129.70.144*, y lanzamos un **nm
 
 ```console
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/HTB/Tier0]
-└─$ nmap -A 10.129.70.144
+└─$ nmap -A 10.129.70.144 -oN nmap_output
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-09 10:27 CEST
 Nmap scan report for 10.129.70.144
 Host is up (0.056s latency).
@@ -70,6 +70,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 21.71 seconds
 ```
+
+Significado de las flags:
+
+* `-A`&nbsp;: escaneo completo (aka agresivo) que ejecuta OS detection, version detection, script scanning y traceroute todo del tirón.
+* `-oN`&nbsp;: imprime la salida en un fichero de texto con el nombre *nmap_output*
 
 **nmap** nos cuenta que el puerto *23/tcp* esta abierto y con un servicio *telnet* escuchando. Intentamos conectarnos, utilizando *root* como user.
 
