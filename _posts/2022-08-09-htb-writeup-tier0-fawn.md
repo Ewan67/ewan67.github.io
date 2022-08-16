@@ -1,7 +1,7 @@
 ---
-title: HTB - Starting Point - Tier 0 - Fawn Writeup
+title: Hack The Box - Starting Point - Tier 0 - Fawn Writeup
 date: 2022-08-09 09:10:00 +0800
-categories: [HTB, Writeup]
+categories: ["Hack The Box", Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
 ---
 
@@ -29,7 +29,7 @@ PORT   STATE SERVICE VERSION
 | ftp-syst:
 |   STAT:
 | FTP server status:
-|      Connected to ::ffff:10.10.16.72
+|      Connected to ::ffff:10.10.xx.xx
 |      Logged in as ftp
 |      TYPE: ASCII
 |      No session bandwidth limit

@@ -1,14 +1,14 @@
 ---
-title: HTB - Starting Point - Tier 0 - Meow Writeup
+title: Hack The Box - Starting Point - Tier 0 - Meow Writeup
 date: 2022-08-09 09:00:00 +0800
-categories: [HTB, Writeup]
+categories: ["Hack The Box", Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
 ---
 
-Con estra entrada iniciamos una serie de posts en los que vamos a resolver las 4 máquinas que conforman el **Tier 0** del **Starting Point** de [HTB](https://app.hackthebox.com/starting-point), la puerta de entrada y requisito para poder avanzar dentro de esta plataforma.
+Con esta entrada iniciamos una serie de posts en los que vamos a resolver las 4 máquinas que conforman el **Tier 0** del **Starting Point** de [HTB](https://app.hackthebox.com/starting-point), la puerta de entrada y requisito para poder avanzar dentro de esta plataforma.
 
 
-Resolveremos en el orden en que aparecen listadas en HTB.
+Las resolveremos en el orden en que aparecen listadas en HTB.
 
 ![](/assets/posts/20220809/img01.png)
 

@@ -1,7 +1,7 @@
 ---
-title: HTB - Starting Point - Tier 0 - Dancing Writeup
+title: Hack The Box - Starting Point - Tier 0 - Dancing Writeup
 date: 2022-08-09 09:20:00 +0800
-categories: [HTB, Writeup]
+categories: ["Hack The Box", Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
 ---
 

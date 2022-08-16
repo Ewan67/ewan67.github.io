@@ -1,7 +1,7 @@
 ---
-title: HTB - Starting Point - Tier 1 - Responder Writeup
+title: Hack The Box - Starting Point - Tier 1 - Responder Writeup
 date: 2022-08-10 09:30:00 +0800
-categories: [HTB, Writeup]
+categories: ["Hack The Box", Writeup]
 tags: [htb, writeups]     # TAG names should always be lowercase
 ---
 

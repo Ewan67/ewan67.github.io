@@ -1,7 +1,7 @@
 ---
-title: THM - Agent T - Writeup
+title: Try Hack Me - Agent T - Writeup
 date: 2022-08-08 09:30:00 +0800
-categories: [THM, Writeup]
+categories: ["Try Hack Me", Writeup]
 tags: [thm, writeups]     # TAG names should always be lowercase
 ---
 

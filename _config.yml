@@ -23,7 +23,8 @@ timezone: Europe/London
 
 title: ewan67                          # the main title
 
-tagline: Wer ein Warum hat zu leben, erträgt fast jedes Wie.   # it will display as the sub-title
+# it will display as the sub-title
+tagline: La verdadera ignorancia no es la ausencia de conocimiento, sino la negativa a adquirirlo. # Wer ein Warum hat zu leben, erträgt fast jedes Wie.   
 
 description: >-                        # used by seo meta and the atom feed
   Ewan67 personal site.
