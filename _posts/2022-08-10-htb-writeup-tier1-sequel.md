@@ -1,7 +1,7 @@
 ---
 title: Hack The Box - Starting Point - Tier 1 - Sequel Writeup
 date: 2022-08-10 09:10:00 +0800
-categories: ["Hack The Box", Writeup]
+categories: ["Hack The Box"]
 tags: [htb, writeups]     # TAG names should always be lowercase
 ---
 

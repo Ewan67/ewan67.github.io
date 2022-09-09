@@ -1,7 +1,7 @@
 ---
 title: Try Hack Me - Anonymous - Writeup
 date: 2022-08-16 19:30:00 +0800
-categories: ["Try Hack Me", Writeup]
+categories: ["Try Hack Me"]
 tags: [thm, writeups]     # TAG names should always be lowercase
 ---
 

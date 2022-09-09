@@ -1,7 +1,7 @@
 ---
 title: Try Hack Me - Brooklyn Nine Nine - Writeup
 date: 2022-08-16 09:30:00 +0800
-categories: ["Try Hack Me", Writeup]
+categories: ["Try Hack Me"]
 tags: [thm, writeups]     # TAG names should always be lowercase
 ---
 
@@ -103,7 +103,7 @@ Tenemos tres puertos abiertos:
 
 * *21/tcp* con un servicio ftp escuchando
 * *22/tcp* con un servicio ssh escuchando
-* *80/tcp* con un servicio htttp escuchando
+* *80/tcp* con un servicio http escuchando
 
 El volcado de **nmap** nos cuenta que el servidor FTP soporta login anónimo. Vamos a por ello.
 

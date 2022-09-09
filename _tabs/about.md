@@ -4,7 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-Programador. Pentester. Autodidacta. Curioso a tiempo completo. Músico aficionado.
+Programador Full Stack. Pentester. Autodidacta. Curioso a tiempo completo. Músico aficionado.
 
 Dejo este tip debajo xq aporta algo de color a la página.
 
