@@ -6,7 +6,6 @@ order: 4
 
 Programador Full Stack. Pentester. Autodidacta. Curioso a tiempo completo. Músico aficionado.
 
-Dejo este tip debajo xq aporta algo de color a la página.
+<script src="https://tryhackme.com/badge/1101512"></script>
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+
